@@ -1,13 +1,14 @@
 use anyhow::Result;
 use indicatif::{ProgressBar, ProgressStyle};
 use std::fs::File;
-use std::io::{self, Read};
+use std::io::{self, ErrorKind, Read};
 use std::path::PathBuf;
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
 #[structopt(name = "pipeviewer", about = "A pipe inspecting application.")]
 struct Opt {
+    // TODO: Handle more input files
     /// Input file, stdin if not specified
     #[structopt(parse(from_os_str))]
     input: Option<PathBuf>,
@@ -40,6 +41,9 @@ fn main() -> Result<()> {
     };
     let mut output = pb.wrap_write(io::stdout());
 
-    io::copy(&mut input, &mut output)?;
-    Ok(())
+    match io::copy(&mut input, &mut output) {
+        Ok(_) => Ok(()),
+        Err(e) if e.kind() == ErrorKind::BrokenPipe => Ok(()),
+        Err(e) => Err(e)?,
+    }
 }
