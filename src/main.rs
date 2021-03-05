@@ -21,7 +21,7 @@ fn main() -> Result<()> {
         let len = file.metadata()?.len();
         (Box::new(file), Some(len))
     } else {
-        (Box::new(std::io::stdin()), None)
+        (Box::new(io::stdin()), None)
     };
 
     let pb = if let Some(len) = len {
@@ -38,7 +38,7 @@ fn main() -> Result<()> {
         );
         pb
     };
-    let mut output = pb.wrap_write(std::io::stdout());
+    let mut output = pb.wrap_write(io::stdout());
 
     io::copy(&mut input, &mut output)?;
     Ok(())
