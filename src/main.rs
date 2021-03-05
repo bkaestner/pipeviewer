@@ -34,7 +34,7 @@ fn main() -> Result<()> {
         let pb = ProgressBar::new_spinner();
         pb.set_style(
             ProgressStyle::default_spinner()
-                .template("[{elapsed_precise}] {spinner} {bytes} {msg}"),
+                .template("[{elapsed_precise}] {spinner} {bytes_per_sec} [{bytes}]"),
         );
         pb
     };
