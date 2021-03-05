@@ -24,11 +24,17 @@ struct Opt {
 }
 
 fn main() -> Result<()> {
-    let mut input = std::io::stdin();
+    let opts = Opt::from_args();
+
+    let mut input: Box<dyn Read> = if let Some(file) = opts.input {
+        Box::new(std::fs::File::open(file)?)
+    } else {
+        Box::new(std::io::stdin())
+    };
     let mut output = std::io::stdout();
     let mut report = std::io::stderr();
 
-    let mut buffer = [0; 1024];
+    let mut buffer = vec![0; opts.buffer_size];
     let mut total = 0;
 
     while let Ok(n) = input.read(&mut buffer) {
