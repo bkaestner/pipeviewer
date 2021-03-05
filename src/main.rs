@@ -26,10 +26,9 @@ fn main() -> Result<()> {
 
     let pb = if let Some(len) = len {
         let pb = ProgressBar::new(len);
-        pb.set_style(
-            ProgressStyle::default_bar()
-                .template("[{elapsed_precise}] {bar} {bytes}/{total_bytes} ETA: {eta} {msg}"),
-        );
+        pb.set_style(ProgressStyle::default_bar().template(
+            "[{elapsed_precise}] {bar} {bytes_per_sec} [{bytes}/{total_bytes}] ETA: {eta}",
+        ));
         pb
     } else {
         let pb = ProgressBar::new_spinner();
