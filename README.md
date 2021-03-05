@@ -8,6 +8,9 @@ However, instead of following the course material and the course content with mi
 # Goals of this project
 
 - [ ] Implement a simple pipeviewer that reports the current status via `stderr` and either takes input from `stdin` or a file and writes to `stdout`
-
+- Add automatic checks on GitHub (see https://actions-rs.github.io/)
+    - [x] Check formatting (rustfmt)
+    - [x] Check style (clippy)
+    - [ ] Test code
  [pv]: https://sourceforge.net/projects/pipeviewer/ "pipeviewer project" 
  [udemy]: https://www.udemy.com/course/hands-on-systems-programming-with-rust/
