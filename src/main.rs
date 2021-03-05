@@ -44,6 +44,6 @@ fn main() -> Result<()> {
     match io::copy(&mut input, &mut output) {
         Ok(_) => Ok(()),
         Err(e) if e.kind() == ErrorKind::BrokenPipe => Ok(()),
-        Err(e) => Err(e)?,
+        Err(e) => Err(e.into()),
     }
 }
