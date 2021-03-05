@@ -1,3 +1,4 @@
+use anyhow::Result;
 use humanize_rs::bytes::Bytes;
 use std::io::{Read, Write};
 use std::path::PathBuf;
@@ -22,7 +23,7 @@ struct Opt {
     buffer_size: usize,
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() -> Result<()> {
     let mut input = std::io::stdin();
     let mut output = std::io::stdout();
     let mut report = std::io::stderr();
