@@ -19,7 +19,8 @@ struct Opt {
     #[structopt(parse(from_os_str))]
     input: Option<PathBuf>,
 
-    #[structopt(short, long, parse(try_from_str = parse_bytes), default_value = "2MiB")]
+    /// Internal buffer size
+    #[structopt(short, long, name = "SIZE", parse(try_from_str = parse_bytes), default_value = "2MiB")]
     buffer_size: usize,
 }
 
